@@ -16,9 +16,10 @@ RSpec.describe Hn::Rollup::Note do
 
   it 'aggregates children' do
     expected = { 'title' => 'Test 0',
+      'amount' => 330,
       'children' => [
         { 'title' => 'Test 0.0',
-          'amount' => 100,
+          'amount' => 130,
           'children' => [
             { 'title' => 'Test 0.0.0',
               'amount' => 10 },

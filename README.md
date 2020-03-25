@@ -240,49 +240,49 @@ area.
 The following units are supported in the core `hn` units collection,
 and more are possible via plugins:
 
-Name: **HN::Unit::Null**
+Name: **HN::Value::Null**
 Reduced representation: `null`
 Alternate representation: `{ "null": null }`
 Sibling aggregation: **drop**: `{ "null": null }` + `*` -> `*`
 Parent aggregation: **drop**: `*` + `{ "null": null }` -> `*`
 
-Name: **HN::Unit::Boolean**
+Name: **HN::Value::Boolean**
 Reduced representation: `false` | `true`
 Alternate representation: `{ "boolean": true }` | `{ "boolean": false }`
 Sibling agregation: **drop**: `{ "boolean": * }` + `{ "boolean": * }` -> `{ "null": null }`
 Parent aggregation: **drop**: `{ "boolean": * }` + `{ "boolean": * }` -> `{ "null": null }`
 
-Name: **HN::Unit::Number**
+Name: **HN::Value::Number**
 Reduced representation: `0` | `1` | ...
 Alternate representation: `{ "number": 0 }`
 Sibling aggregation: **add**: `{ "number": 0 }` + `{ "number": 1 }` -> `{ "number": 1 }`
 Parent aggregation: **add**:  `{ "number": 0 }` + `{ "number": 1 }` -> `{ "number": 1 }`
 
-Name: **HN::Unit::Dollar**
+Name: **HN::Value::Dollar**
 Reduced representation: `$9` (`9 USD`)
 Alternate representation: `{ "dollars": 0 }`
 Sibling aggregation: **add**
 Parent aggregation: **add** (?)
 
-Name: **HN::Unit::Interval**
+Name: **HN::Value::Interval**
 Reduced represetation: `2d` | `5m` | `3h30m`
 Alternate representation: `{ "interval (seconds)": 180 }`
 Sibling aggregation: **add**
 Parent aggregation: **add**
 
-Name: **HN::Unit::Period**
+Name: **HN::Value::Period**
 Reduced representation: `3/4/2019 - 1/10/2020`
 Alternate representation: `{ "period": "2019-03-04 00:00:00Z..2020-01-10 00:00:00Z" }`
 Sibling aggregation: **widen**
 Parent aggregation: **widen**
 
-Name: **HN::Unit::PeriodStart**
+Name: **HN::Value::PeriodStart**
 Reduced representation: `start 3/4/2019`
 Alternate representation: `{ "period start": "2019-03-04 00:00:00Z" }`
 Sibling aggregation: **min**
 Parent aggregation: **min**
 
-Name: **HN::Unit::PeriodEnd**
+Name: **HN::Value::PeriodEnd**
 Reduced representation: `end 1/10/2020`
 Alternate representation: `{ "period end": "2020-01-20 00:00:00Z" }`
 Sibling aggregation: **max**
