@@ -51,6 +51,7 @@ module Hn
       end
 
       def initialize(repr)
+        @original = repr
         if repr.respond_to? :keys
           @canonical_value = from_canonical(repr)
         else
@@ -61,12 +62,10 @@ module Hn
       end
 
       def canonical_value=(new_value)
-        # $stderr.puts("< #{label} storing cv #{new_value.inspect}")
         @canonical_value = new_value
       end
 
       def canonical_value
-        # $stderr.puts("> #{label} returning cv #{@canonical_value.inspect} (#{@canonical_value.class})")
         @canonical_value
       end
 
@@ -105,6 +104,17 @@ module Hn
         {
           label => canonical_value
         }
+      end
+
+      def value(value_style=:note)
+        case value_style
+        when :canonical
+          canonical
+        when :reduce
+          reduce
+        else
+          @original
+        end
       end
 
     end

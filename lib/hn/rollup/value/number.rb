@@ -16,7 +16,7 @@ module Hn
         end
 
         def aggregate_sibling(sibling)
-          self.class.new({ label => canonical_value + sibling.canonical_value })
+          self.class.new(canonical_value + sibling.canonical_value)
         end
 
       end

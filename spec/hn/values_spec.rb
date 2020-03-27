@@ -122,6 +122,7 @@ RSpec.describe Hn::Rollup::Value do
 
     context 'with valid value' do
 
+      let(:zero) { Hn::Rollup::Value::Number.new({ 'number' => 0 }) }
       let(:nine) { Hn::Rollup::Value::Number.new({ 'number' => 9 }) }
       let(:five_seven) { Hn::Rollup::Value::Number.new({ 'number' => 5.7 }) }
 
@@ -133,13 +134,15 @@ RSpec.describe Hn::Rollup::Value do
       end
 
       it "aggregates with a sibling" do
+        expect(zero.aggregate_sibling(nine).reduce).to eq(9)
         expect(nine.aggregate_sibling(five_seven).reduce).to eq(14.7)
         expect(five_seven.aggregate_sibling(nine).reduce).to eq(14.7)
       end
 
       it "aggregates with a child" do
-        expect(nine.aggregate_sibling(five_seven).reduce).to eq(14.7)
-        expect(five_seven.aggregate_sibling(nine).reduce).to eq(14.7)
+        expect(zero.aggregate_child(nine).reduce).to eq(9)
+        expect(nine.aggregate_child(five_seven).reduce).to eq(14.7)
+        expect(five_seven.aggregate_child(nine).reduce).to eq(14.7)
       end
 
     end
