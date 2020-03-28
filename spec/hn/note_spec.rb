@@ -47,6 +47,35 @@ RSpec.describe Hn::Rollup::Note do
     expect(Hn::Rollup::Note.new(note_repr).note).to eq(note_repr)
   end
 
+  it 'has multiple children' do
+    note_repr = {
+      'title' => 'parent_title',
+      'children' => [
+        { 'title' => 'child0_title' },
+        { 'title' => 'child1_title' }
+      ]
+    }
+
+    expect(Hn::Rollup::Note.new(note_repr).note).to eq(note_repr)
+  end
+
+  it 'has multiple levels of children' do
+    note_repr = {
+      'title' => 'parent_title',
+      'children' => [
+        { 'title' => 'child0_title',
+          'children' => [
+            { 'title' => 'child00_title' },
+            { 'title' => 'child01_title' }]},
+        { 'title' => 'child1_title',
+          'children' => [
+            { 'title' => 'child10_title' }]}
+      ]}
+
+    expect(Hn::Rollup::Note.new(note_repr).note).to eq(note_repr)
+  end
+
+
   it 'rolls up children' do
     expect(Hn::Rollup::Note.new({ 'title' => 'parent_title',
                                   'score' => 0,
